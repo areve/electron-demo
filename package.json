@@ -4,7 +4,7 @@
   "description": "example electron and pwa app",
   "main": "main.js",
   "scripts": {
-    "run": "electron .",
+    "dev": "electron .",
     "build": "electron-packager . --out=build --prune=true --overwrite --ignore=\"build\" --ignore=\"\\.git(ignore|modules)\"",
     "release": "yarn build && node install.js"
   },
@@ -15,3 +15,4 @@
     "electron-winstaller": "^2.7.0"
   }
 }
+  

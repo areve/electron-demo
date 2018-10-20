@@ -4,9 +4,10 @@ let win
 
 function createWindow() {
   win = new BrowserWindow({
+    show: false,
     width: 800, height: 600,
     fullscreen: false,
-    alwaysOnTop: true,
+    alwaysOnTop: false,
     backgroundColor: '#ccc',
     frame: false,
     webPreferences: {
@@ -14,6 +15,9 @@ function createWindow() {
     }
   })
 
+  win.once('ready-to-show', () => {
+    win.show()
+  })
   win.loadFile('index.html')
   win.setMenu(null)
   win.closeEnabled = false

@@ -7,15 +7,27 @@
 
   <link href="https://unpkg.com/flatcss@1.0.21/flat.css" rel="stylesheet" type="text/css" media="screen">
   <style>
+    html {
+      height: 100%;
+      min-height: 100%;
+      
+    }
     body {
       background-color: #ccc;
-      color: #000; 
+      color: #000;
+      height: 100%;
+      min-height: 100%;
+      -webkit-app-region: drag;
+      -webkit-user-select: none;
+    }
+
+    button {
+      -webkit-app-region: no-drag;
     }
 
     fieldset {
       background-color: #fff;
     }
-
   </style>
 </head>
 
@@ -32,6 +44,17 @@
   <script>
     const remote = require('electron').remote
 
+    function launch() {
+      const win = remote.getCurrentWindow()
+      let child = new remote.BrowserWindow({
+        parent: win, modal: true, show: false
+      })
+      child.setMenu(null)
+      child.loadURL('https://areve.github.io/vue-pwa-demo/dist/')
+      child.once('ready-to-show', () => {
+        child.show()
+      })
+    }
     function exit() {
       const win = remote.getCurrentWindow()
       win.closeEnabled = true
@@ -43,6 +66,7 @@
     }
   </script>
   <fieldset>
+    <button class="button" onclick="launch()">Launch</button>
     <button class="button" onclick="exit()">Exit</button>
     <button class="button" onclick="debug()">Debug</button>
   </fieldset>
