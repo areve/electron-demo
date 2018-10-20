@@ -44,6 +44,11 @@
   <script>
     const remote = require('electron').remote
 
+
+   remote.globalShortcut.register('Ctrl+X', exit)
+   remote.globalShortcut.register('Ctrl+O', openDialog)
+
+
     function launch() {
       const win = remote.getCurrentWindow()
       let child = new remote.BrowserWindow({
@@ -60,6 +65,10 @@
       win.closeEnabled = true
       win.close()
     }
+    function openDialog() {
+      const win = remote.getCurrentWindow()
+      console.log(remote.dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
+    }
     function debug() {
       const win = remote.getCurrentWindow()
       win.webContents.openDevTools()
@@ -67,6 +76,7 @@
   </script>
   <fieldset>
     <button class="button" onclick="launch()">Launch</button>
+    <button class="button" onclick="openDialog()">Open Dialog</button>
     <button class="button" onclick="exit()">Exit</button>
     <button class="button" onclick="debug()">Debug</button>
   </fieldset>

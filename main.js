@@ -1,10 +1,11 @@
+const path = require('path')
 const { app, BrowserWindow, Tray, Menu } = require('electron')
 
 let win
 let tray = null
 
 function createWindow() {
-  tray = new Tray('favicon.ico')
+  tray = new Tray(path.resolve(__dirname, 'favicon.ico'))
   const contextMenu = Menu.buildFromTemplate([
     {label: 'Item1', type: 'radio'},
     {label: 'Item2', type: 'radio'},
