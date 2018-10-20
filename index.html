@@ -4,30 +4,75 @@
 <head>
   <meta charset="UTF-8">
   <title>Hello World!</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  <script src="https://unpkg.com/muuri@0.7.1/dist/muuri.min.js"></script>
 
   <link href="https://unpkg.com/flatcss@1.0.21/flat.css" rel="stylesheet" type="text/css" media="screen">
   <style>
     html {
       height: 100%;
       min-height: 100%;
-      
-    }
-    body {
-      background-color: #ccc;
-      color: #000;
-      height: 100%;
-      min-height: 100%;
-      -webkit-app-region: drag;
-      -webkit-user-select: none;
+
     }
 
+    body {
+      background-color: #333;
+      color: #ddd;
+      height: 100%;
+      min-height: 100%;
+      max-width: initial;
+      -webkit-app-region: drag;
+      -webkit-user-select: none;
+      margin: 0;
+    }
+
+    .item,
+    .grid,
     button {
       -webkit-app-region: no-drag;
     }
 
     fieldset {
-      background-color: #fff;
+      background-color: #444;
+      border-color: #000;
     }
+
+    .grid {
+  position: relative;
+}
+.item {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  line-height: 200px;
+  margin: 5px;
+  z-index: 1;
+}
+.item.muuri-item-hidden {
+  z-index: 0;
+}
+.item.muuri-item-releasing {
+  z-index: 2;
+}
+.item.muuri-item-dragging {
+  z-index: 3;
+}
+.item-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: red;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+}
+.item.muuri-item-dragging .item-content {
+  background: blue;
+}
+.item.muuri-item-releasing .item-content {
+  background: blueViolet;
+}
   </style>
 </head>
 
@@ -41,45 +86,161 @@
   <script>document.write(process.versions.electron)</script>.
 
 
-  <script>
-    const remote = require('electron').remote
-
-
-   remote.globalShortcut.register('Ctrl+X', exit)
-   remote.globalShortcut.register('Ctrl+O', openDialog)
-
-
-    function launch() {
-      const win = remote.getCurrentWindow()
-      let child = new remote.BrowserWindow({
-        parent: win, modal: true, show: false
-      })
-      child.setMenu(null)
-      child.loadURL('https://areve.github.io/vue-pwa-demo/dist/')
-      child.once('ready-to-show', () => {
-        child.show()
-      })
-    }
-    function exit() {
-      const win = remote.getCurrentWindow()
-      win.closeEnabled = true
-      win.close()
-    }
-    function openDialog() {
-      const win = remote.getCurrentWindow()
-      console.log(remote.dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
-    }
-    function debug() {
-      const win = remote.getCurrentWindow()
-      win.webContents.openDevTools()
-    }
-  </script>
   <fieldset>
     <button class="button" onclick="launch()">Launch</button>
     <button class="button" onclick="openDialog()">Open Dialog</button>
     <button class="button" onclick="exit()">Exit</button>
     <button class="button" onclick="debug()">Debug</button>
   </fieldset>
+  
+  
+  <div class="grid">
+      <div class="item" data-id="1">
+        <div class="item-content">1</div>
+      </div>
+      <div class="item" data-id="2">
+        <div class="item-content">2</div>
+      </div>
+      <div class="item" data-id="3">
+        <div class="item-content">3</div>
+      </div>
+      <div class="item" data-id="4">
+        <div class="item-content">4</div>
+      </div>
+      <div class="item" data-id="5">
+        <div class="item-content">5</div>
+      </div>
+      <div class="item" data-id="6">
+        <div class="item-content">6</div>
+      </div>
+      <div class="item" data-id="7">
+        <div class="item-content">7</div>
+      </div>
+      <div class="item" data-id="8">
+        <div class="item-content">8</div>
+      </div>
+      <div class="item" data-id="9">
+        <div class="item-content">9</div>
+      </div>
+      <div class="item" data-id="10">
+        <div class="item-content">10</div>
+      </div>
+      <div class="item" data-id="11">
+        <div class="item-content">11</div>
+      </div>
+      <div class="item" data-id="12">
+        <div class="item-content">12</div>
+      </div>
+      <div class="item" data-id="13">
+        <div class="item-content">13</div>
+      </div>
+      <div class="item" data-id="14">
+        <div class="item-content">14</div>
+      </div>
+      <div class="item" data-id="15">
+        <div class="item-content">15</div>
+      </div>
+      <div class="item" data-id="16">
+        <div class="item-content">16</div>
+      </div>
+      <div class="item" data-id="17">
+        <div class="item-content">17</div>
+      </div>
+      <div class="item" data-id="18">
+        <div class="item-content">18</div>
+      </div>
+      <div class="item" data-id="19">
+        <div class="item-content">19</div>
+      </div>
+      <div class="item" data-id="20">
+        <div class="item-content">20</div>
+      </div>
+    </div>
 </body>
+
+<script>
+  const remote = require('electron').remote
+
+
+  remote.globalShortcut.register('Ctrl+X', exit)
+  remote.globalShortcut.register('Ctrl+O', openDialog)
+
+
+  function launch() {
+    const win = remote.getCurrentWindow()
+    let child = new remote.BrowserWindow({
+      parent: win, modal: true, show: false
+    })
+    child.setMenu(null)
+    child.loadURL('https://areve.github.io/vue-pwa-demo/dist/')
+    child.once('ready-to-show', () => {
+      child.show()
+    })
+  }
+  function exit() {
+    const win = remote.getCurrentWindow()
+    win.closeEnabled = true
+    win.close()
+  }
+  function openDialog() {
+    const win = remote.getCurrentWindow()
+    console.log(remote.dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] }))
+  }
+  function debug() {
+    const win = remote.getCurrentWindow()
+    win.webContents.openDevTools()
+  }
+
+  initGrid();
+
+  function initGrid() {
+    var grid = new Muuri('.grid', {
+      dragEnabled: true,
+      layoutOnInit: false
+    }).on('move', function () {
+      saveLayout(grid);
+    });
+
+    var layout = window.localStorage.getItem('layout');
+    if (layout) {
+      loadLayout(grid, layout);
+    } else {
+      grid.layout(true);
+    }
+  }
+
+  function serializeLayout(grid) {
+    var itemIds = grid.getItems().map(function (item) {
+      return item.getElement().getAttribute('data-id');
+    });
+    return JSON.stringify(itemIds);
+  }
+
+  function saveLayout(grid) {
+    var layout = serializeLayout(grid);
+    window.localStorage.setItem('layout', layout);
+  }
+
+  function loadLayout(grid, serializedLayout) {
+    var layout = JSON.parse(serializedLayout);
+    var currentItems = grid.getItems();
+    var currentItemIds = currentItems.map(function (item) {
+      return item.getElement().getAttribute('data-id')
+    });
+    var newItems = [];
+    var itemId;
+    var itemIndex;
+
+    for (var i = 0; i < layout.length; i++) {
+      itemId = layout[i];
+      itemIndex = currentItemIds.indexOf(itemId);
+      if (itemIndex > -1) {
+        newItems.push(currentItems[itemIndex])
+      }
+    }
+
+    grid.sort(newItems, { layout: 'instant' });
+  }
+</script>
 
 </html>
