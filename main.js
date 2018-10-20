@@ -90,7 +90,7 @@ function createWindow() {
     fullscreen: false,
     alwaysOnTop: false,
     backgroundColor: '#ccc',
-    //frame: false,
+    frame: false,
     webPreferences: {
       devTools: true
     }
@@ -100,7 +100,7 @@ function createWindow() {
     win.show()
   })
   win.loadFile('index.html')
-  //win.setMenu(null)
+  win.setMenu(null)
   win.closeEnabled = false
   win.on('close', (event) => {
     if (!win.closeEnabled) event.preventDefault()
