@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+
+  <link href="https://unpkg.com/flatcss@1.0.21/flat.css" rel="stylesheet" type="text/css" media="screen">
+  <style>
+    body {
+      background-color: #ccc;
+      color: #000; 
+    }
+
+    fieldset {
+      background-color: #fff;
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1>Hello World!</h1>
+  We are using node
+  <script>document.write(process.versions.node)</script>,
+  Chrome
+  <script>document.write(process.versions.chrome)</script>,
+  and Electron
+  <script>document.write(process.versions.electron)</script>.
+
+
+  <script>
+    const remote = require('electron').remote
+
+    function exit() {
+      const win = remote.getCurrentWindow()
+      win.closeEnabled = true
+      win.close()
+    }
+    function debug() {
+      const win = remote.getCurrentWindow()
+      win.webContents.openDevTools()
+    }
+  </script>
+  <fieldset>
+    <button class="button" onclick="exit()">Exit</button>
+    <button class="button" onclick="debug()">Debug</button>
+  </fieldset>
+</body>
+
+</html>
