@@ -13,10 +13,11 @@ function getInstallerConfig () {
   return Promise.resolve({
     appDirectory: path.join(__dirname, 'build/electronpwa-win32-x64'),
     authors: 'Andrew',
-    noMsi: true,
+    noMsi: false,
     outputDirectory: path.join(__dirname, 'build/windows-installer'),
     exe: 'electronpwa.exe',
+    setupMsi: 'electronpwa-Installer.msi',
     setupExe: 'electronpwa-Installer.exe',
-    //setupIcon: path.join(rootPath, 'assets', 'icons', 'win', 'icon.ico')
+    setupIcon: path.join(__dirname, 'favicon.ico')
   })
 }
