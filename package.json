@@ -1,14 +1,17 @@
 {
-  "name": "electron-pwa",
+  "name": "electronpwa",
   "version": "1.0.0",
-  "description": "",
+  "description": "example electron and pwa app",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "run": "electron .",
+    "build": "electron-packager . --out=build --prune=true --overwrite --ignore=\"build\" --ignore=\"\\.git(ignore|modules)\"",
+    "release": "yarn build && node install.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.0.5"
+    "electron": "^3.0.5",
+    "electron-winstaller": "^2.7.0"
   }
 }
