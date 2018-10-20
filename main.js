@@ -1,3 +1,5 @@
+const windowStateKeeper = require('electron-window-state');
+
 if (require('electron-squirrel-startup')) return;
 
 const path = require('path')
@@ -83,10 +85,17 @@ function createWindow() {
   tray.setToolTip('This is my application.')
   tray.setContextMenu(contextMenu)
 
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: 1000,
+    defaultHeight: 800
+  });
 
   win = new BrowserWindow({
     show: false,
-    width: 800, height: 600,
+    'x': mainWindowState.x,
+    'y': mainWindowState.y,
+    'width': mainWindowState.width,
+    'height': mainWindowState.height,
     fullscreen: false,
     alwaysOnTop: false,
     backgroundColor: '#ccc',
@@ -95,6 +104,9 @@ function createWindow() {
       devTools: true
     }
   })
+
+  mainWindowState.manage(win);
+  
 
   win.once('ready-to-show', () => {
     win.show()

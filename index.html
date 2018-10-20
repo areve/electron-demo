@@ -20,16 +20,23 @@
       height: 100%;
       min-height: 100%;
       max-width: initial;
-      -webkit-app-region: drag;
       -webkit-user-select: none;
-      margin: 0;
+      margin: 5px;
+      overflow: hidden;
+    }
+
+    body h1 {
+      -webkit-app-region: drag;
     }
 
     .item,
+    body .item,
     .grid,
-    button {
-      -webkit-app-region: no-drag;
+    body .grid,
+    body button {
+      -webkit-app-region: no-drag !important;
     }
+
 
     fieldset {
       background-color: #444;
@@ -90,7 +97,6 @@
   <script>document.write(process.versions.chrome)</script>,
   and Electron
   <script>document.write(process.versions.electron)</script>.
-
 
   <fieldset>
     <button class="button" onclick="launch()">Launch</button>
