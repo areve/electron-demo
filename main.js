@@ -118,10 +118,6 @@ function createWindow() {
     if (!win.closeEnabled) event.preventDefault()
   })
   win.on('closed', () => { win = null })
-
-
-
-  
 }
 
 app.on('ready', createWindow)
