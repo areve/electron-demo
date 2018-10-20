@@ -1,8 +1,20 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Tray, Menu } = require('electron')
 
 let win
+let tray = null
 
 function createWindow() {
+  tray = new Tray('favicon.ico')
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Item1', type: 'radio'},
+    {label: 'Item2', type: 'radio'},
+    {label: 'Item3', type: 'radio', checked: true},
+    {label: 'Item4', type: 'radio'}
+  ])
+  tray.setToolTip('This is my application.')
+  tray.setContextMenu(contextMenu)
+
+
   win = new BrowserWindow({
     show: false,
     width: 800, height: 600,
@@ -25,6 +37,10 @@ function createWindow() {
     if (!win.closeEnabled) event.preventDefault()
   })
   win.on('closed', () => { win = null })
+
+
+
+  
 }
 
 app.on('ready', createWindow)
@@ -35,3 +51,6 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (win === null) createWindow()
 })
+
+
+  
