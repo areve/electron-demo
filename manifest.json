@@ -3,7 +3,7 @@
   "lang": "en-gb",
   "name": "demo pwa",
   "scope": "/",
-  "display": "browser",
+  "display": "fullscreen",
   "start_url": "/electron-demo/",
   "short_name": "EPDemo",
   "theme_color": "transparent",
