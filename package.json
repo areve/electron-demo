@@ -4,6 +4,7 @@
   "description": "example electron and pwa app",
   "main": "main.js",
   "scripts": {
+    "watch": "browser-sync start --localOnly --files .",
     "dev": "electron .",
     "build": "electron-packager . --out=build --prune=true --overwrite --ignore=\"build\" --ignore=\"\\.git(ignore|modules)\"",
     "release": "yarn build && node install.js"
@@ -11,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2.26.3",
     "electron": "^3.0.5",
     "electron-winstaller": "^2.7.0"
   },
