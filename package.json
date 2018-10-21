@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "browser-sync start --localOnly --files .",
     "dev": "electron .",
-    "build": "electron-packager . --out=build --prune=true --overwrite --ignore=\"build\" --ignore=\"\\.git(ignore|modules)\"",
+    "build": "electron-packager . --out=build --prune=true --icon=favicon.ico --overwrite --ignore=\"build\" --ignore=\"\\.git(ignore|modules)\"",
     "release": "yarn build && node install.js"
   },
   "author": "",
