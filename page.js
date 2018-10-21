@@ -92,11 +92,11 @@ const desktop = {
 
     const status = document.getElementById('status')
     if (typeof process !== 'undefined') {
-      status.innerText =     
+      status.innerText =
         'Using node ' +
         process.versions.node +
-        ' Chrome ' + process.versions.chrome + 
-        ' and Electron ' + process.versions.electron  
+        ' Chrome ' + process.versions.chrome +
+        ' and Electron ' + process.versions.electron
     } else {
       status.innerText = 'Using browser mode, desktop functionality is disabled'
       return
@@ -114,6 +114,37 @@ const desktop = {
       const el = elems[i]
       el.style.display = 'initial'
     }
-    
+
+  }
+}
+
+
+const pwa = {
+  initialize() {
+    Notification.requestPermission(function (status) {
+      console.log('Notification permission status:', status)
+    })
+  },
+  notify() {
+    if (Notification.permission == 'granted') {
+      navigator.serviceWorker.getRegistration().then(function (reg) {
+        var options = {
+          body: 'This is an example notification',
+          icon: 'android/android-launchericon-72-72.png',
+          vibrate: [100, 50, 100],
+          data: {
+            dateOfArrival: Date.now(),
+            primaryKey: 1
+          },
+          actions: [
+            {action: 'explore', title: 'Explore this new world',
+              icon: 'android/android-launchericon-72-72.png'},
+            {action: 'close', title: 'Close notification',
+              icon: 'android/android-launchericon-72-72.png'},
+          ]
+        }
+        reg.showNotification('Example Notice', options)
+      })
+    }
   }
 }
