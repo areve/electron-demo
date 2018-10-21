@@ -3,8 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Hello World!</title>
+  <title>electron-pwa-demo</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
   <script src="https://unpkg.com/muuri@0.7.1/dist/muuri.min.js"></script>
   <link href="https://unpkg.com/flatcss@1.0.21/flat.css" rel="stylesheet" type="text/css" media="screen">
   
@@ -94,11 +96,32 @@
     .item.muuri-item-releasing .item-content {
       background: blueViolet;
     }
+
+    pre {
+      color: #666;
+    }
+
+    .tiny {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding: 1em;
+    }
+
+    .tiny h2 {
+      margin: .2em 0;
+      font-style: italic;
+    }
+    .tiny i {
+      font-size: 3em;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Hello World!</h1>
+  <h1>electron-pwa-demo</h1>
+  <p>
+    Drag the title to move this window.
+  </p>
   We are using node
   <script>document.write(process.versions.node)</script>,
   Chrome
@@ -108,15 +131,26 @@
 
   <fieldset>
     <button class="button" onclick="launch()">Launch</button>
-    <button class="button" onclick="openDialog()">Open Dialog</button>
+    <button class="button" onclick="openDialog()">List Directory</button>
+    <button class="button" onclick="clearOutput()">Clear</button>
     <button class="button" onclick="exit()">Exit</button>
     <button class="button" onclick="debug()">Debug</button>
+    <pre id="output">
+    </pre>
   </fieldset>
 
 
   <div class="grid">
     <div class="item" data-id="1">
-      <div class="item-content">1</div>
+      <div class="item-content tiny">
+        <i class="fas fa-laptop"></i>
+        <h2>Tile with data</h2>
+
+        <div><strong>Key1</strong> <em>value2</em></div>
+        <div><strong>Key2</strong> <em>value2</em></div>
+        <div><strong>Key3</strong> <em>value3</em></div>
+        <div></div>
+      </div>
     </div>
     <div class="item" data-id="2">
       <div class="item-content">2</div>
@@ -204,7 +238,15 @@
   }
   function openDialog() {
     const win = remote.getCurrentWindow()
-    console.log(remote.dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] }))
+    const dir = remote.dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] });
+    const fs = require('fs')
+    const list = fs.readdirSync(dir[0])
+    document.getElementById('output').innerText = JSON.stringify(list, null, '  ');
+
+  }
+  function clearOutput() {
+    document.getElementById('output').innerText = '';
+
   }
   function debug() {
     const win = remote.getCurrentWindow()
