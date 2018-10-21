@@ -22,17 +22,17 @@ function handleSquirrelEvent() {
   const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
   const exeName = path.basename(process.execPath);
 
-  const spawn = function(command, args) {
+  const spawn = function (command, args) {
     let spawnedProcess, error;
 
     try {
-      spawnedProcess = ChildProcess.spawn(command, args, {detached: true});
-    } catch (error) {}
+      spawnedProcess = ChildProcess.spawn(command, args, { detached: true });
+    } catch (error) { }
 
     return spawnedProcess;
   };
 
-  const spawnUpdate = function(args) {
+  const spawnUpdate = function (args) {
     return spawn(updateDotExe, args);
   };
 
@@ -77,10 +77,20 @@ let tray = null
 function createWindow() {
   tray = new Tray(path.resolve(__dirname, 'favicon.ico'))
   const contextMenu = Menu.buildFromTemplate([
-    {label: 'Item1', type: 'radio'},
-    {label: 'Item2', type: 'radio'},
-    {label: 'Item3', type: 'radio', checked: true},
-    {label: 'Item4', type: 'radio'}
+    {
+      label: 'Exit',
+      click() {
+        win.closeEnabled = true
+        win.close()
+
+      }
+    },
+    {
+      label: 'Debug',
+      click() {
+        win.webContents.openDevTools()
+      }
+    },
   ])
   tray.setToolTip('This is my application.')
   tray.setContextMenu(contextMenu)
@@ -106,7 +116,7 @@ function createWindow() {
   })
 
   mainWindowState.manage(win);
-  
+
 
   win.once('ready-to-show', () => {
     win.show()
@@ -130,4 +140,4 @@ app.on('activate', () => {
 })
 
 
-  
+
