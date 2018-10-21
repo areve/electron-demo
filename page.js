@@ -137,10 +137,10 @@ const pwa = {
             primaryKey: 1
           },
           actions: [
-            {action: 'explore', title: 'Explore this new world',
-              icon: 'android/android-launchericon-72-72.png'},
+            {action: 'explore', title: 'See example.com',
+              icon: 'images/yes.png'},
             {action: 'close', title: 'Close notification',
-              icon: 'android/android-launchericon-72-72.png'},
+              icon: 'images/no.png'},
           ]
         }
         reg.showNotification('Example Notice', options)
