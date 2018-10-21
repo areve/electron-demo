@@ -1,8 +1,11 @@
+let remote, electronLocalshortcut, win
+try {
+  remote = require('electron').remote
+  electronLocalshortcut = require('electron-localshortcut')
+  win = remote.getCurrentWindow()
+} catch (err) {
 
-const remote = require('electron').remote
-const electronLocalshortcut = require('electron-localshortcut')
-const win = remote.getCurrentWindow()
-
+}
 const grid = {
   initialize() {
     var grid = new Muuri('.grid', {
@@ -86,6 +89,19 @@ const desktop = {
     win.setFullScreen(!win.isFullScreen())
   },
   initialize() {
+
+    const status = document.getElementById('status')
+    if (typeof process !== 'undefined') {
+      status.innerText =     
+        'Using node ' +
+        process.versions.node +
+        ' Chrome ' + process.versions.chrome + 
+        ' and Electron ' + process.versions.electron  
+    } else {
+      status.innerText = 'Using browser mode, desktop functionality is disabled'
+      return
+    }
+
     remote.globalShortcut.unregister('Ctrl+Shift+X')
     remote.globalShortcut.register('Ctrl+Shift+X', desktop.exit)
     remote.globalShortcut.unregister('Ctrl+Shift+O')
@@ -98,5 +114,6 @@ const desktop = {
       const el = elems[i]
       el.style.display = 'initial'
     }
+    
   }
 }
