@@ -1,0 +1,120 @@
+html {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  background-color: #333;
+  color: #eee;
+  height: 100%;
+  min-height: 100%;
+  max-width: initial;
+  -webkit-user-select: none;
+  margin: 5px;
+  padding: 0;
+
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body h1 {
+  -webkit-app-region: drag;
+}
+
+.item,
+body .item,
+.grid,
+body .grid,
+body button {
+  -webkit-app-region: no-drag !important;
+}
+
+
+fieldset {
+  background-color: #444;
+  border-color: #000;
+}
+
+.grid {
+  position: relative;
+}
+
+.item {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  line-height: 200px;
+  margin: 5px;
+  z-index: 1;
+}
+
+.size1 {
+  width: 410px;
+  height: 200px;
+}
+
+.size2 {
+  width: 200px;
+  height: 410px;
+}
+
+.item.muuri-item-hidden {
+  z-index: 0;
+}
+
+.item.muuri-item-releasing {
+  z-index: 2;
+}
+
+.item.muuri-item-dragging {
+  z-index: 3;
+}
+
+.item-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: red;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+}
+
+.item.muuri-item-dragging .item-content {
+  background: blue;
+}
+
+.item.muuri-item-releasing .item-content {
+  background: blueViolet;
+}
+
+pre {
+  color: #666;
+}
+
+.tiny {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 1em;
+}
+
+.tiny h2 {
+  margin: .2em 0;
+  font-style: italic;
+}
+
+.tiny i {
+  font-size: 3em;
+}
+
+kbd {
+  background-color: darkblue;
+}
+
+
+.desktop {
+  display: none;
+}
