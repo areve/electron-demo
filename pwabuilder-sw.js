@@ -31,6 +31,25 @@ self.addEventListener('fetch', function(evt) {
   evt.waitUntil(update(evt.request));
 });
 
+self.addEventListener('notificationclose', function(e) {
+  var notification = e.notification;
+  var primaryKey = notification.data.primaryKey;
+
+  console.log('Closed notification: ' + primaryKey);
+});
+
+self.addEventListener('notificationclick', function(e) {
+  var notification = e.notification;
+  var primaryKey = notification.data.primaryKey;
+  var action = e.action;
+
+  if (action === 'close') {
+    notification.close();
+  } else {
+    clients.openWindow('http://www.example.com');
+    notification.close();
+  }
+});
 
 function precache() {
   return caches.open(CACHE).then(function (cache) {
