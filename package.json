@@ -17,6 +17,7 @@
     "electron-winstaller": "^2.7.0"
   },
   "dependencies": {
+    "electron-localshortcut": "^3.1.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-window-state": "^5.0.2"
   }
