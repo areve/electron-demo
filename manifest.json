@@ -4,7 +4,7 @@
   "name": "demo pwa",
   "scope": "/",
   "display": "browser",
-  "start_url": "https://areve.github.io/electron-demo/",
+  "start_url": "/electron-demo/",
   "short_name": "EPDemo",
   "theme_color": "transparent",
   "description": "An experimental PWA that can also use electron",
