@@ -6,7 +6,7 @@ var precacheFiles = [
       'index.html',
       'manifest.json',
       'page.js',
-      'manin.css'
+      'main.css'
     ];
 
 //Install stage sets up the cache-array to configure pre-cache content
